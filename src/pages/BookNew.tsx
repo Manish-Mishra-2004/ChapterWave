@@ -90,7 +90,8 @@ export default function BookNew() {
         body: { title, genre, topic, chapterCount: chapterCount[0], tone, audience, description, instructions },
       });
       if (error) throw error;
-      setChapters(data.chapters || []);
+      const withIds = (data.chapters || []).map((c: any, i: number) => ({ ...c, id: crypto.randomUUID() }));
+      setChapters(withIds);
     } catch (err: any) {
       toast({ title: 'AI Error', description: err.message || 'Failed to generate outline', variant: 'destructive' });
       // Generate placeholder chapters as fallback
