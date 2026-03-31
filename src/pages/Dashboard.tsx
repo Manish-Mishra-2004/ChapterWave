@@ -54,6 +54,20 @@ export default function Dashboard() {
   const [search, setSearch] = useState('');
   const [sortBy, setSortBy] = useState('updated_at');
   const [filterStatus, setFilterStatus] = useState('all');
+  const [readerBook, setReaderBook] = useState<Book | null>(null);
+  const [readerChapters, setReaderChapters] = useState<any[]>([]);
+  const [readerOpen, setReaderOpen] = useState(false);
+
+  const openReader = async (book: Book) => {
+    const { data } = await supabase
+      .from('chapters')
+      .select('*')
+      .eq('book_id', book.id)
+      .order('order_index');
+    setReaderBook(book);
+    setReaderChapters(data || []);
+    setReaderOpen(true);
+  };
 
   useEffect(() => {
     fetchBooks();
