@@ -78,6 +78,7 @@ export default function Dashboard() {
     const { data, error } = await supabase
       .from('books')
       .select('*')
+      .eq('user_id', user?.id)
       .order('updated_at', { ascending: false });
     if (error) {
       toast({ title: 'Error', description: error.message, variant: 'destructive' });
