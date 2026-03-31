@@ -24,6 +24,7 @@ export type Database = {
           genre: string
           id: string
           language: string
+          published: boolean
           status: string
           subtitle: string | null
           title: string
@@ -42,6 +43,7 @@ export type Database = {
           genre?: string
           id?: string
           language?: string
+          published?: boolean
           status?: string
           subtitle?: string | null
           title: string
@@ -60,6 +62,7 @@ export type Database = {
           genre?: string
           id?: string
           language?: string
+          published?: boolean
           status?: string
           subtitle?: string | null
           title?: string
