@@ -40,6 +40,7 @@ export default function BookNew() {
   const [audience, setAudience] = useState('');
   const [description, setDescription] = useState('');
   const [language, setLanguage] = useState('English');
+  const [coverUrl, setCoverUrl] = useState('');
 
   // Step 2
   const [topic, setTopic] = useState('');
