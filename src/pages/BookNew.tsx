@@ -26,10 +26,6 @@ interface ChapterOutline {
   estimatedWordCount: number;
   keyPoints: string[];
 }
-  description: string;
-  estimatedWordCount: number;
-  keyPoints: string[];
-}
 
 const genres = ['Fiction', 'Non-Fiction', 'Self-Help', 'Technical', 'Business', 'Children', 'Biography', 'Fantasy', 'Mystery', 'Other'];
 const tones = ['Academic', 'Conversational', 'Storytelling', 'Professional', 'Humorous', 'Inspirational'];
