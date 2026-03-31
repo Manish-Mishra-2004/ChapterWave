@@ -83,7 +83,22 @@ export default function BookNew() {
   const [chapters, setChapters] = useState<ChapterOutline[]>([]);
   const [generating, setGenerating] = useState(false);
 
-  const generateOutline = async () => {
+  const sensors = useSensors(
+    useSensor(PointerSensor, { activationConstraint: { distance: 8 } }),
+    useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates }),
+  );
+
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+    if (over && active.id !== over.id) {
+      setChapters(prev => {
+        const oldIndex = prev.findIndex(c => c.id === active.id);
+        const newIndex = prev.findIndex(c => c.id === over.id);
+        return arrayMove(prev, oldIndex, newIndex).map((c, i) => ({ ...c, chapterNumber: i + 1 }));
+      });
+    }
+  };
+
     setGenerating(true);
     try {
       const { data, error } = await supabase.functions.invoke('generate-outline', {
