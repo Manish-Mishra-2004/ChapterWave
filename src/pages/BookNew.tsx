@@ -98,7 +98,7 @@ export default function BookNew() {
         .insert({
           title, subtitle: subtitle || null, author, genre, language,
           description, tone, status: 'draft', user_id: user!.id,
-          total_word_count: 0,
+          total_word_count: 0, cover_image: coverUrl || null,
         })
         .select()
         .single();
