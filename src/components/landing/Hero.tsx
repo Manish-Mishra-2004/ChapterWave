@@ -42,9 +42,9 @@ export default function Hero() {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
-            <Link to="/signup">
+            <Link to={user ? '/dashboard' : '/signup'}>
               <Button size="lg" className="gradient-primary border-0 text-white text-base px-8 h-12 animate-pulse-glow">
-                Start Writing Free <ArrowRight className="ml-2 h-4 w-4" />
+                {user ? 'Start Writing' : 'Start Writing Free'} <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
             <Button size="lg" variant="outline" className="text-base px-8 h-12">
