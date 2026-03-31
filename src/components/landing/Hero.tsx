@@ -2,8 +2,10 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Play, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useAuth } from '@/lib/auth';
 
 export default function Hero() {
+  const { user } = useAuth();
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
       {/* Background gradient orbs */}
@@ -40,9 +42,9 @@ export default function Hero() {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
-            <Link to="/signup">
+            <Link to={user ? '/dashboard' : '/signup'}>
               <Button size="lg" className="gradient-primary border-0 text-white text-base px-8 h-12 animate-pulse-glow">
-                Start Writing Free <ArrowRight className="ml-2 h-4 w-4" />
+                {user ? 'Start Writing' : 'Start Writing Free'} <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </Link>
             <Button size="lg" variant="outline" className="text-base px-8 h-12">
