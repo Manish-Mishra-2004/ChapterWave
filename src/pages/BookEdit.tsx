@@ -5,7 +5,7 @@ import {
   BookOpen, ArrowLeft, Save, Eye, EyeOff, Maximize, Minimize,
   Plus, Trash2, GripVertical, Sparkles, Loader2, MessageSquare,
   Bold, Italic, Heading1, Heading2, List, ListOrdered, Quote, Code, Link as LinkIcon,
-  ChevronLeft, ChevronRight, Send, X
+  ChevronLeft, ChevronRight, Send, X, Download
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -16,6 +16,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import ExportModal from '@/components/ExportModal';
 
 interface Chapter {
   id: string;
@@ -66,6 +67,7 @@ export default function BookEdit() {
   const [aiMessages, setAiMessages] = useState<{ role: string; content: string }[]>([]);
   const [aiInput, setAiInput] = useState('');
   const [aiChatLoading, setAiChatLoading] = useState(false);
+  const [showExport, setShowExport] = useState(false);
 
   const saveTimer = useRef<NodeJS.Timeout>();
   const autoSaveTimer = useRef<NodeJS.Timeout>();
@@ -337,6 +339,9 @@ export default function BookEdit() {
             <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => setShowAiChat(c => !c)}>
               <MessageSquare className="h-3.5 w-3.5" />
             </Button>
+            <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => setShowExport(true)}>
+              <Download className="h-3.5 w-3.5" />
+            </Button>
           </div>
         </header>
       )}
@@ -521,6 +526,8 @@ export default function BookEdit() {
           <Minimize className="h-4 w-4 mr-1" /> Exit Focus
         </Button>
       )}
+
+      <ExportModal open={showExport} onClose={() => setShowExport(false)} book={book} chapters={chapters} />
     </div>
   );
 }
