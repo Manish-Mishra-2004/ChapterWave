@@ -526,6 +526,8 @@ export default function BookEdit() {
           <Minimize className="h-4 w-4 mr-1" /> Exit Focus
         </Button>
       )}
+
+      <ExportModal open={showExport} onClose={() => setShowExport(false)} book={book} chapters={chapters} />
     </div>
   );
 }
