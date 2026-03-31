@@ -79,7 +79,7 @@ export default function BookReader({ open, onClose, book, chapters }: BookReader
       opacity: 1,
       transformOrigin: 'center center',
       transition: {
-        rotateY: { duration: 0.6, ease: [0.4, 0, 0.2, 1] },
+        rotateY: { duration: 0.6, ease: [0.4, 0, 0.2, 1] as [number, number, number, number] },
         opacity: { duration: 0.3 },
       },
     },
@@ -88,7 +88,7 @@ export default function BookReader({ open, onClose, book, chapters }: BookReader
       opacity: 0,
       transformOrigin: dir > 0 ? 'right center' : 'left center',
       transition: {
-        rotateY: { duration: 0.6, ease: [0.4, 0, 0.2, 1] },
+        rotateY: { duration: 0.6, ease: [0.4, 0, 0.2, 1] as [number, number, number, number] },
         opacity: { duration: 0.3, delay: 0.2 },
       },
     }),
