@@ -187,6 +187,7 @@ export default function BookNew() {
                   <Label>Description ({description.length}/500)</Label>
                   <Textarea value={description} onChange={e => setDescription(e.target.value.slice(0, 500))} placeholder="Brief premise or description" className="mt-1" rows={3} />
                 </div>
+                <CoverImageStep coverUrl={coverUrl} onCoverChange={setCoverUrl} title={title} genre={genre} />
                 <div className="flex justify-end">
                   <Button onClick={() => setStep(2)} disabled={!title} className="gradient-primary border-0 text-white">
                     Next: AI Outline <ArrowRight className="ml-2 h-4 w-4" />
