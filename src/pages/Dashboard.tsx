@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, Search, BookOpen, BarChart3, FileText, Flame, SortAsc, Filter, Edit, Eye, Download, Settings, Trash2, Moon, Sun, LogOut, User } from 'lucide-react';
+import BookReader from '@/components/BookReader';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -53,6 +54,20 @@ export default function Dashboard() {
   const [search, setSearch] = useState('');
   const [sortBy, setSortBy] = useState('updated_at');
   const [filterStatus, setFilterStatus] = useState('all');
+  const [readerBook, setReaderBook] = useState<Book | null>(null);
+  const [readerChapters, setReaderChapters] = useState<any[]>([]);
+  const [readerOpen, setReaderOpen] = useState(false);
+
+  const openReader = async (book: Book) => {
+    const { data } = await supabase
+      .from('chapters')
+      .select('*')
+      .eq('book_id', book.id)
+      .order('order_index');
+    setReaderBook(book);
+    setReaderChapters(data || []);
+    setReaderOpen(true);
+  };
 
   useEffect(() => {
     fetchBooks();
@@ -225,20 +240,39 @@ export default function Dashboard() {
                     <span className="text-xs text-muted-foreground">{(book.total_word_count || 0).toLocaleString()} words</span>
                   </div>
                   <Progress value={book.status === 'complete' ? 100 : book.status === 'in_progress' ? 50 : 10} className="h-1.5 mb-3" />
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs text-muted-foreground">{timeAgo(book.updated_at)}</span>
-                    <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => navigate(`/books/${book.id}/edit`)}><Edit className="h-3.5 w-3.5" /></Button>
-                      <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => navigate(`/books/${book.id}/settings`)}><Settings className="h-3.5 w-3.5" /></Button>
-                      <Button variant="ghost" size="icon" className="h-7 w-7 text-destructive" onClick={() => deleteBook(book.id)}><Trash2 className="h-3.5 w-3.5" /></Button>
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs text-muted-foreground">{timeAgo(book.updated_at)}</span>
+                      <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => navigate(`/books/${book.id}/edit`)}><Edit className="h-3.5 w-3.5" /></Button>
+                        <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => navigate(`/books/${book.id}/settings`)}><Settings className="h-3.5 w-3.5" /></Button>
+                        <Button variant="ghost" size="icon" className="h-7 w-7 text-destructive" onClick={() => deleteBook(book.id)}><Trash2 className="h-3.5 w-3.5" /></Button>
+                      </div>
                     </div>
-                  </div>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="w-full mt-3 gap-1.5 text-xs border-primary/30 text-primary hover:bg-primary/10"
+                      onClick={() => openReader(book)}
+                    >
+                      <Eye className="h-3.5 w-3.5" /> Read it
+                    </Button>
                 </div>
               </motion.div>
             ))}
           </div>
         )}
       </main>
+
+      <AnimatePresence>
+        {readerOpen && (
+          <BookReader
+            open={readerOpen}
+            onClose={() => setReaderOpen(false)}
+            book={readerBook}
+            chapters={readerChapters}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 }
