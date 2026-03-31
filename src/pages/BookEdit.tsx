@@ -339,6 +339,9 @@ export default function BookEdit() {
             <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => setShowAiChat(c => !c)}>
               <MessageSquare className="h-3.5 w-3.5" />
             </Button>
+            <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => setShowExport(true)}>
+              <Download className="h-3.5 w-3.5" />
+            </Button>
           </div>
         </header>
       )}
