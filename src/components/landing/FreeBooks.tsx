@@ -81,12 +81,7 @@ export default function FreeBooks() {
   return (
     <section id="free-books" className="py-20 px-4">
       <div className="container mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-12"
-        >
+        <div className="text-center mb-12">
           <Badge variant="secondary" className="mb-4 px-4 py-1.5 text-sm">
             <BookOpen className="h-3.5 w-3.5 mr-1.5" /> Community Library
           </Badge>
@@ -94,16 +89,15 @@ export default function FreeBooks() {
           <p className="text-muted-foreground max-w-2xl mx-auto">
             Explore books published by our community of writers. Sign in to start reading.
           </p>
-        </motion.div>
+        </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {books.map((book, i) => (
             <motion.div
               key={book.id}
               initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.05 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.08 }}
               className="glass rounded-xl overflow-hidden hover:-translate-y-1 transition-transform group"
             >
               <div className={`h-44 relative bg-gradient-to-br ${gradientCovers[i % gradientCovers.length]} flex items-end p-4`}>
