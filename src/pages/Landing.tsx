@@ -2,6 +2,7 @@ import Navbar from '@/components/landing/Navbar';
 import Hero from '@/components/landing/Hero';
 import Features from '@/components/landing/Features';
 import HowItWorks from '@/components/landing/HowItWorks';
+import FreeBooks from '@/components/landing/FreeBooks';
 import Testimonials from '@/components/landing/Testimonials';
 import Pricing from '@/components/landing/Pricing';
 import FAQ from '@/components/landing/FAQ';
@@ -14,6 +15,7 @@ export default function Landing() {
       <Hero />
       <Features />
       <HowItWorks />
+      <FreeBooks />
       <Testimonials />
       <Pricing />
       <FAQ />
