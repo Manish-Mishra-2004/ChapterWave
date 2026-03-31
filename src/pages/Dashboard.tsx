@@ -225,7 +225,7 @@ export default function Dashboard() {
                 className="glass rounded-xl overflow-hidden hover:-translate-y-1 transition-transform group"
               >
                 {/* Cover */}
-                <div className={`h-40 bg-gradient-to-br ${gradientCovers[i % gradientCovers.length]} flex items-end p-4`}>
+                <div className={`h-40 relative bg-gradient-to-br ${gradientCovers[i % gradientCovers.length]} flex items-end p-4`}>
                   {book.cover_image ? (
                     <img src={book.cover_image} alt={book.title} className="absolute inset-0 w-full h-full object-cover" />
                   ) : null}
