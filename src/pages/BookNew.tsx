@@ -263,9 +263,14 @@ export default function BookNew() {
               <motion.div key="step3" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-5">
                 <h2 className="text-2xl font-bold">Confirm & Create</h2>
                 <div className="glass rounded-xl p-6 space-y-3">
-                  <h3 className="text-lg font-bold">{title}</h3>
-                  {subtitle && <p className="text-muted-foreground">{subtitle}</p>}
-                  <div className="flex flex-wrap gap-2 text-sm">
+                  <div className="flex gap-4">
+                    {coverUrl && <img src={coverUrl} alt="Cover" className="w-24 h-32 rounded-lg object-cover flex-shrink-0" />}
+                    <div className="space-y-2">
+                      <h3 className="text-lg font-bold">{title}</h3>
+                      {subtitle && <p className="text-muted-foreground">{subtitle}</p>}
+                      <p className="text-sm text-muted-foreground">By {author}</p>
+                    </div>
+                  </div>
                     <Badge variant="secondary">{genre || 'No genre'}</Badge>
                     <Badge variant="secondary">{tone}</Badge>
                     <Badge variant="secondary">{language}</Badge>
